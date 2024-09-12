@@ -1,7 +1,7 @@
 version: '2'
 services:
   onlyoffice-documentserver:
-    images: registry.serverdemo.net/onlyoffice-documentserver:8.1.3-3
+    image: registry.serverdemo.net/onlyoffice-documentserver:8.1.3-3
     container_name: onlyoffice-documentserver
     depends_on:
       - onlyoffice-postgresql
