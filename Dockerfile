@@ -101,17 +101,17 @@ EXPOSE 80 443
 
 ARG COMPANY_NAME=onlyoffice
 ARG PRODUCT_NAME=documentserver
-ARG PRODUCT_EDITION=
-ARG PACKAGE_VERSION=
+ARG PRODUCT_EDITION=8.1.3
+ARG PACKAGE_VERSION=3-raven
 ARG TARGETARCH
-ARG PACKAGE_BASEURL="http://download.onlyoffice.com/install/documentserver/linux"
+ARG PACKAGE_BASEURL="http://172.16.0.187:8080/ONLYOFFICE/build_tools/deb_build/document-server-package/deb"
 
 ENV COMPANY_NAME=$COMPANY_NAME \
     PRODUCT_NAME=$PRODUCT_NAME \
     PRODUCT_EDITION=$PRODUCT_EDITION \
     DS_DOCKER_INSTALLATION=true
 
-RUN PACKAGE_FILE="${COMPANY_NAME}-${PRODUCT_NAME}${PRODUCT_EDITION}${PACKAGE_VERSION:+_$PACKAGE_VERSION}_${TARGETARCH:-$(dpkg --print-architecture)}.deb" && \
+RUN PACKAGE_FILE="${COMPANY_NAME}-${PRODUCT_NAME}_${PRODUCT_EDITION}-${PACKAGE_VERSION}_${TARGETARCH:-$(dpkg --print-architecture)}.deb" && \
     wget -q -P /tmp "$PACKAGE_BASEURL/$PACKAGE_FILE" && \
     apt-get -y update && \
     service postgresql start && \
