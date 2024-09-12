@@ -25,11 +25,11 @@ services:
     restart: always
     stop_grace_period: 60s
     volumes:
-       - /var/www/onlyoffice/Data
-       - /var/log/onlyoffice
-       - /var/lib/onlyoffice/documentserver/App_Data/cache/files
-       - /var/www/onlyoffice/documentserver-example/public/files
-       - /usr/share/fonts
+       - /opt/onlyoffice/DocumentServer/data:/opt/onlyoffice/var/www/onlyoffice/Data
+       - /opt/onlyoffice/DocumentServer/log:/var/log/onlyoffice
+       - /opt/onlyoffice/DocumentServer/cache:/var/lib/onlyoffice/documentserver/App_Data/cache/files
+       - /opt/onlyoffice/DocumentServer/public:/var/www/onlyoffice/documentserver-example/public/files
+       - /opt/onlyoffice/DocumentServer/fonts:/usr/share/fonts
        
   onlyoffice-rabbitmq:
     container_name: onlyoffice-rabbitmq
@@ -49,7 +49,7 @@ services:
     expose:
       - '5432'
     volumes:
-      - postgresql_data:/var/lib/postgresql
+      - /opt/onlyoffice/DocumentServer/postgresql_data:postgresql_data:/var/lib/postgresql
 
 volumes:
   postgresql_data:
